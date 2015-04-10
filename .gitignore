@@ -25,3 +25,4 @@ coverage
 .DS_Store
 .idea
 .secret
+app/assets/javascripts/components/_compiled/.module-cache/*

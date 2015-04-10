@@ -1,0 +1,3 @@
+<script id='TodosData' type='application/json'>
+  <%= raw ActiveModel::ArraySerializer.new(@todos, each_serializer: TodoSerializer, root: 'todos').to_json %> 
+</script>
