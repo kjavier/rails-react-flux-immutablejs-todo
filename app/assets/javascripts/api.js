@@ -27,13 +27,13 @@ modulejs.define('api', ['jquery', 'appDispatcher'], function($, AppDispatcher) {
   }
 
   var Api = function(apiUrl, key) {
-    //this.get = function() { return ajaxCall('GET', apiUrl, params, key); }
+    this.get = function(params) { return ajaxCall('GET', apiUrl, params, key); }
 
     this.post = function(params) { return ajaxCall('POST', apiUrl, params, key); }
 
-    //this.update = function() { return ajaxCall('PATCH', apiUrl, params, key); }
+    this.update = function(params) { return ajaxCall('PUT', apiUrl, params, key); }
 
-    //this.destroy = function() { return ajaxCall('DELETE', apiUrl, null, key); }
+    this.destroy = function() { return ajaxCall('DELETE', apiUrl, null, key); }
   };
 
   return Api;

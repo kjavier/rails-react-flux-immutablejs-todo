@@ -5,6 +5,18 @@ modulejs.define('todoActions', ['api', 'todoConstants'], function(Api, TodoConst
     create: function(params) {
       var api = new Api(API_URL, TodoConstants.CREATE);
       api.post(params);
+    },
+
+    update: function(params, id) {
+      var url = API_URL + '/' + id;
+      var api = new Api(url, TodoConstants.UPDATE);
+      api.update(params);
+    },
+
+    destroy: function(id) {
+      var url = API_URL + '/' + id;
+      var api = new Api(url, TodoConstants.DESTROY);
+      api.destroy();
     }
   };
 

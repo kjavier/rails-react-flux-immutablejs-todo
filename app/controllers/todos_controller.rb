@@ -1,11 +1,9 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo.all
+    @todos = Todo.all.order(:id)
   end
 
   def create
-    todo = Todo.new(todo_params)
-
     if todo.save
       render json: todo
     else
@@ -13,7 +11,31 @@ class TodosController < ApplicationController
     end
   end
 
+  def update
+    if todo.update(todo_params)
+      render json: todo
+    else
+      render json: todo.errors.full_messages, status: 404
+    end
+  end
+
+  def destroy
+    if todo.destroy
+      render json: todo
+    else
+      render json: todo.errors.full_messages, status: 404
+    end
+  end
+
   private
+
+  def todo
+    @todo ||=  if params[:id]
+      Todo.find(params[:id])
+    else
+      Todo.new(todo_params)
+    end
+  end
 
   def todo_params
     params.require(:todo).permit(:name)

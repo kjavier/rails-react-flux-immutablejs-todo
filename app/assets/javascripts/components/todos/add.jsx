@@ -1,26 +1,25 @@
-modulejs.define('todoAdd', ['react', 'todoActions'], function(React, TodoActions) {
-  var view = React.createClass({
-    _onSubmit: function(e) {
-      var form = React.findDOMNode(this.refs.formAddTodo);
-      TodoActions.create($(form).serialize());
+modulejs.define('todoAdd', ['react', 'immutableRenderMixin', 'todoActions', 'todoForm'], function(React,
+  ImmutableRenderMixin, TodoActions, TodoForm) {
 
-      var input = React.findDOMNode(this.refs.inputAddTodo);
-      $(input).val('');
+  var view = React.createClass({
+    displayName: 'TodoAdd',
+
+    mixins: [ImmutableRenderMixin],
+
+    _onSubmit: function(e) {
+      var todoForm = this.refs.addForm;
+      var form = React.findDOMNode(todoForm.refs.formTodo);
+      var input = React.findDOMNode(todoForm.refs.inputTodo);
 
       e.preventDefault();
+      TodoActions.create($(form).serialize());
+      $(input).val('');
     },
 
     render: function() {
-      return (
-        <form className='form-horizontal' ref='formAddTodo' onSubmit={this._onSubmit}>
-          <div className='form-group'>
-            <div className='col-md-12'>
-              <input type='text' className='form-control' name='todo[name]' ref='inputAddTodo'
-                placeholder="Type here and hit 'Enter' when done" defaultValue='' />
-            </div>
-          </div>
-        </form>
-      );
+      console.log('Render Add');
+
+      return <TodoForm ref='addForm' onSubmit={this._onSubmit} editingEnabled={true} />;
     }
   });
 
