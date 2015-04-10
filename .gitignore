@@ -11,3 +11,17 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore dotenv
+.env
+
+# Ignore simplecov generated files
+coverage
+
+# Ignore other things
+*swp
+*~
+.project
+.DS_Store
+.idea
+.secret
